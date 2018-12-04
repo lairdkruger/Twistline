@@ -1,5 +1,5 @@
 # Twistline Real-Time Sound Visualizer
-live demo at https://lairdkruger.github.io/Twistline/ 
+Live demo at https://lairdkruger.github.io/Twistline/ 
  
 - runs in chrome
 - a powerful computer (CPU) is recommended to minimise latency between the sound and the visuals

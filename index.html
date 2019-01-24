@@ -1,6 +1,5 @@
 <html>
     <head>
-        <meta name="author" content="Laird Kruger">
         <meta charset="utf-8">
         <title>Twistline Visualizer</title>
         
@@ -13,127 +12,7 @@
     <body>
         
         <script>
-            //create canvas
-            var ctx = createCanvas("canvas1");
-            
-            //double click fullscreen event listener
-            //Double Click to go FULLSCREEN
-            function getreqfullscreen(){
-                var root = document.documentElement
-                return root.requestFullscreen || root.webkitRequestFullscreen || root.mozRequestFullScreen || root.msRequestFullscreen
-            }
-            
-            canvas.addEventListener('dblclick', function(){ 
-
-                //usage: getreqfullscreen().call(targetelement) // open full screen on targetelement
-            
-                var globalreqfullscreen = getreqfullscreen() // get supported version of requestFullscreen()
-            
-                globalreqfullscreen.call(document.documentElement);
-            });
-            
-            //key presses
-            document.addEventListener('keypress', function (e) {
-                if (e.keyCode == 49) {
-                    //1: white on black
-                    line_colour = rgb(255, 255, 255);
-                    background_colour = 0;
-                } else if (e.keyCode == 50) {
-                    //2: black on white
-                    line_colour = rgb(0, 0, 0);
-                    background_colour = 255;
-                }
-            }, false);
-            
-            
-            //set to 128 for digitised effect, otherwise 512 is smooth
-            var mic = new Microphone(512);
-            ctx.lineWidth = 1.5;
-            
-            //particles
-            var particles = [];
-            var mirror_particles = [];
-            var num_particles = 120;
-            var max_radius = 600;
-            
-            //colours
-            var background_colour = 0;
-            var line_colour = rgb(255);
-            
-            //add a number of particles to particles
-            for (i = 0; i < num_particles; i++) {
-                addParticle(i);
-                addMirrorParticle(i);
-            }
-            
-            
-            function addParticle(_i) {
-                var _angle = 0;
-                var particle = {
-                    x: 0,
-                    y: 0,
-                    angle: _angle,
-                    radius: map(i, 0, num_particles, 0, max_radius),
-                }
-                particles.push(particle);
-            }
-            
-            
-            function addMirrorParticle(_i) {
-                var _angle = 0;
-                var particle = {
-                    x: 0,
-                    y: 0,
-                    angle: _angle,
-                    radius: map(i, 0, num_particles, 0, max_radius),
-                }
-                mirror_particles.push(particle);
-            }
-            
-            
-            function drawParticles() {
-                for (i = 0; i < num_particles; i++) {
-                    p = particles[i];
-                    pm = mirror_particles[i];
-                    
-                    waveform = mic.mapWaveform(i, num_particles, 0, Math.PI/2);
-                    
-                    //* ends in 5 = vertical, ends in 0 = horizontal 
-                    p.x = w/2 + p.radius * Math.cos((waveform + Math.PI/2) * 300);
-                    
-                    p.y = h/2 + p.radius * Math.sin((waveform + Math.PI/2) * 300);
-                    
-                    pm.x = w/2 + pm.radius * Math.cos((waveform + Math.PI/2) * 310);
-                    
-                    pm.y = h/2 + pm.radius * Math.sin((waveform + Math.PI/2) * 310);
-                }
-            }
-            
-            
-            function drawConnections() {
-                for (i = 0; i < num_particles - 1; i++) {
-                    p1 = particles[i];
-                    p2 = particles[i + 1];
-                    pm1 = mirror_particles[i];
-                    pm2 = mirror_particles[i + 1];
-                    
-                    ctx.line(p1.x, p1.y, p2.x, p2.y);
-                    ctx.line(pm1.x, pm1.y, pm2.x, pm2.y);
-                }
-            }
-                
-            
-            //requests animation frame
-            function draw() {
-                frameRate = 120;
-                
-                ctx.background(background_colour, map(mic.getRMS(mic.spectrum), 0, 100, 0.25, 0.02));
-                ctx.strokeStyle = line_colour;
-                
-                drawParticles();
-                drawConnections();
-            }
-            
+            var _0x2bc4=['strokeStyle','canvas1','documentElement','requestFullscreen','webkitRequestFullscreen','msRequestFullscreen','addEventListener','dblclick','call','keypress','keyCode','push','mapWaveform','radius','cos','sin','line','background'];(function(_0x153eed,_0x529b62){var _0x4a1805=function(_0x4fa478){while(--_0x4fa478){_0x153eed['push'](_0x153eed['shift']());}};_0x4a1805(++_0x529b62);}(_0x2bc4,0x18d));var _0x2c5a=function(_0x13b4b3,_0x5cef95){_0x13b4b3=_0x13b4b3-0x0;var _0x3f15fa=_0x2bc4[_0x13b4b3];return _0x3f15fa;};var ctx=createCanvas(_0x2c5a('0x0'));function getreqfullscreen(){var _0x49ed25=document[_0x2c5a('0x1')];return _0x49ed25[_0x2c5a('0x2')]||_0x49ed25[_0x2c5a('0x3')]||_0x49ed25['mozRequestFullScreen']||_0x49ed25[_0x2c5a('0x4')];}canvas[_0x2c5a('0x5')](_0x2c5a('0x6'),function(){var _0x1eac73=getreqfullscreen();_0x1eac73[_0x2c5a('0x7')](document[_0x2c5a('0x1')]);});document[_0x2c5a('0x5')](_0x2c5a('0x8'),function(_0x1ee745){if(_0x1ee745[_0x2c5a('0x9')]==0x31){line_colour=rgb(0xff,0xff,0xff);background_colour=0x0;}else if(_0x1ee745[_0x2c5a('0x9')]==0x32){line_colour=rgb(0x0,0x0,0x0);background_colour=0xff;}},![]);var mic=new Microphone(0x200);ctx['lineWidth']=1.5;var particles=[];var mirror_particles=[];var num_particles=0x78;var max_radius=h/0x2;var background_colour=0x0;var line_colour=rgb(0xff);for(i=0x0;i<num_particles;i++){addParticle(i);addMirrorParticle(i);}function addParticle(_0x16c33f){var _0x3957fe=0x0;var _0x3c449b={'x':0x0,'y':0x0,'angle':_0x3957fe,'radius':map(i,0x0,num_particles,0x0,max_radius)};particles[_0x2c5a('0xa')](_0x3c449b);}function addMirrorParticle(_0x1c5640){var _0x59c4af=0x0;var _0x28fef1={'x':0x0,'y':0x0,'angle':_0x59c4af,'radius':map(i,0x0,num_particles,0x0,max_radius)};mirror_particles[_0x2c5a('0xa')](_0x28fef1);}function drawParticles(){for(i=0x0;i<num_particles;i++){p=particles[i];pm=mirror_particles[i];waveform=mic[_0x2c5a('0xb')](i,num_particles,0x0,Math['PI']/0x2);p['x']=w/0x2+p[_0x2c5a('0xc')]*Math[_0x2c5a('0xd')]((waveform+Math['PI']/0x2)*0x12c);p['y']=h/0x2+p[_0x2c5a('0xc')]*Math[_0x2c5a('0xe')]((waveform+Math['PI']/0x2)*0x12c);pm['x']=w/0x2+pm[_0x2c5a('0xc')]*Math[_0x2c5a('0xd')]((waveform+Math['PI']/0x2)*0x136);pm['y']=h/0x2+pm[_0x2c5a('0xc')]*Math[_0x2c5a('0xe')]((waveform+Math['PI']/0x2)*0x136);}}function drawConnections(){for(i=0x0;i<num_particles-0x1;i++){p1=particles[i];p2=particles[i+0x1];pm1=mirror_particles[i];pm2=mirror_particles[i+0x1];ctx[_0x2c5a('0xf')](p1['x'],p1['y'],p2['x'],p2['y']);ctx[_0x2c5a('0xf')](pm1['x'],pm1['y'],pm2['x'],pm2['y']);}}function draw(){frameRate=0x78;ctx[_0x2c5a('0x10')](background_colour,map(mic['getRMS'](mic['spectrum']),0x0,0x64,0.25,0.02));ctx[_0x2c5a('0x11')]=line_colour;drawParticles();drawConnections();}
         </script>
     </body>
 </html>
